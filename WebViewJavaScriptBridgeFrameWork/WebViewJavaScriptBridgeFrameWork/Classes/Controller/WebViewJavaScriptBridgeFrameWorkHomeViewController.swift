@@ -26,6 +26,9 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     
     var authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjU0LCJyb2xlVHlwZSI6MiwiaXNzIjoiaHR0cDovL3Bob25lLnNlZWR1Lm1lL3RlYWNoZXIvbG9naW4iLCJpYXQiOjE1MjIxMzAyMDUsImV4cCI6MTUyODEzMDIwNSwibmJmIjoxNTIyMTMwMjA1LCJqdGkiOiJHam9mbzRtQTN5eDFSazZDIn0.5u65fCABLVc4MXYluL0U-v1j-K1V7y-I8KGFWRQ0fgo"
     
+    ///当前时间戳
+    var currentTimeStamp = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setPage()
@@ -78,9 +81,53 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
             print("close called: \(data)")
         }
         
+        //录音
+        self.bridge.registerHandler("record") { (data, responseCallBack) in
+            self.record()
+        }
+        
+        //停止录音
+        self.bridge.registerHandler("stopRecord") { (data, responseCallBack) in
+            self.stopRecord()
+        }
+        
         let url = URL(string: self.linked)
         self.webView.load(URLRequest(url: url!))
         self.view.addSubview(webView)
+    }
+    
+    //MARK: 录音和停止录音
+    
+    ///录音
+    fileprivate func record() {
+        
+        //获取当前时间戳
+        self.getCurrentTimeStamp()
+        
+        
+    }
+    
+    ///停止录音
+    fileprivate func stopRecord() {
+        
+    }
+    
+    ///获取当前时间戳
+    fileprivate func getCurrentTimeStamp() {
+        
+        //获取当前时间
+        let now = Date()
+        
+        //创建一个日期格式器
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        print("当前日期时间：\(dateFormatter.string(from: now))")
+        
+        //当前时间的时间戳
+        let timeInterval = now.timeIntervalSince1970
+        let timeStamp = Int(timeInterval)
+        self.currentTimeStamp = "\(timeStamp)" //赋值操作
+        print("当前时间戳：\(timeStamp)")
     }
 }
 
