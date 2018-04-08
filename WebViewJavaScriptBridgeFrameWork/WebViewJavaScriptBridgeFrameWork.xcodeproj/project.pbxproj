@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D894522A207A4F400014BC83 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945224207A4F400014BC83 /* AudioPlayer.swift */; };
+		D894522B207A4F400014BC83 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945225207A4F400014BC83 /* Recorder.swift */; };
+		D894522C207A4F400014BC83 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945226207A4F400014BC83 /* Music.swift */; };
+		D894522D207A4F400014BC83 /* AudioWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8945229207A4F400014BC83 /* AudioWrapper.m */; };
+		D8945231207A4FA50014BC83 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D894522F207A4FA50014BC83 /* libmp3lame.a */; };
+		D8945233207A51150014BC83 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945232207A51150014BC83 /* common.swift */; };
 		D8C00B3320736C95006ED965 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C00B3220736C95006ED965 /* AppDelegate.swift */; };
 		D8C00B3520736C95006ED965 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C00B3420736C95006ED965 /* ViewController.swift */; };
 		D8C00B3820736C95006ED965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C00B3620736C95006ED965 /* Main.storyboard */; };
@@ -41,6 +47,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8945224207A4F400014BC83 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		D8945225207A4F400014BC83 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		D8945226207A4F400014BC83 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		D8945228207A4F400014BC83 /* AudioWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioWrapper.h; sourceTree = "<group>"; };
+		D8945229207A4F400014BC83 /* AudioWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioWrapper.m; sourceTree = "<group>"; };
+		D894522F207A4FA50014BC83 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		D8945230207A4FA50014BC83 /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		D8945232207A51150014BC83 /* common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
 		D8C00B2F20736C95006ED965 /* WebViewJavaScriptBridgeFrameWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebViewJavaScriptBridgeFrameWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C00B3220736C95006ED965 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8C00B3420736C95006ED965 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8945231207A4FA50014BC83 /* libmp3lame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +108,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8945223207A4F400014BC83 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				D8945232207A51150014BC83 /* common.swift */,
+				D8945224207A4F400014BC83 /* AudioPlayer.swift */,
+				D8945225207A4F400014BC83 /* Recorder.swift */,
+				D8945226207A4F400014BC83 /* Music.swift */,
+				D8945227207A4F400014BC83 /* AudioWrapper */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		D8945227207A4F400014BC83 /* AudioWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				D8945228207A4F400014BC83 /* AudioWrapper.h */,
+				D8945229207A4F400014BC83 /* AudioWrapper.m */,
+			);
+			path = AudioWrapper;
+			sourceTree = "<group>";
+		};
+		D894522E207A4FA50014BC83 /* lame */ = {
+			isa = PBXGroup;
+			children = (
+				D894522F207A4FA50014BC83 /* libmp3lame.a */,
+				D8945230207A4FA50014BC83 /* lame.h */,
+			);
+			name = lame;
+			path = Public/lame;
+			sourceTree = "<group>";
+		};
 		D8C00B2620736C95006ED965 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +162,8 @@
 		D8C00B3120736C95006ED965 /* WebViewJavaScriptBridgeFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				D894522E207A4FA50014BC83 /* lame */,
+				D8945223207A4F400014BC83 /* Public */,
 				D8C00B6420736CC3006ED965 /* Classes */,
 				D8C00B6820736CC3006ED965 /* WebViewJavascriptBridge */,
 				D8C00B3220736C95006ED965 /* AppDelegate.swift */,
@@ -315,15 +363,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8945233207A51150014BC83 /* common.swift in Sources */,
 				D8C00B3520736C95006ED965 /* ViewController.swift in Sources */,
 				D8C00B7820737D21006ED965 /* WebViewJavaScriptBridgeFrameWorkSubViewController.swift in Sources */,
 				D8C00B3320736C95006ED965 /* AppDelegate.swift in Sources */,
+				D894522B207A4F400014BC83 /* Recorder.swift in Sources */,
 				D8C00B7420736CC3006ED965 /* WebViewJavascriptBridge_JS.m in Sources */,
 				D8C00B7220736CC3006ED965 /* WebViewJavaScriptBridgeFrameWorkHomeViewController.swift in Sources */,
+				D894522D207A4F400014BC83 /* AudioWrapper.m in Sources */,
 				D8C00B7520736CC3006ED965 /* WebViewJavascriptBridgeBase.m in Sources */,
 				D8C00B7620736CC3006ED965 /* WKWebViewJavascriptBridge.m in Sources */,
+				D894522A207A4F400014BC83 /* AudioPlayer.swift in Sources */,
 				D8C00B7120736CC3006ED965 /* WebViewJavaScriptBridgeFrameWorkBaseViewController.swift in Sources */,
 				D8C00B7320736CC3006ED965 /* WebViewJavascriptBridge.m in Sources */,
+				D894522C207A4F400014BC83 /* Music.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +548,10 @@
 				INFOPLIST_FILE = WebViewJavaScriptBridgeFrameWork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WebViewJavaScriptBridgeFrameWork/Public/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.WebViewJavaScriptBridgeFrameWork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebViewJavaScriptBridgeFrameWork/WebViewJavaScriptBridgeFrameWork-Bridging-Header.h";
@@ -514,6 +571,10 @@
 				INFOPLIST_FILE = WebViewJavaScriptBridgeFrameWork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WebViewJavaScriptBridgeFrameWork/Public/lame",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.WebViewJavaScriptBridgeFrameWork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebViewJavaScriptBridgeFrameWork/WebViewJavaScriptBridgeFrameWork-Bridging-Header.h";

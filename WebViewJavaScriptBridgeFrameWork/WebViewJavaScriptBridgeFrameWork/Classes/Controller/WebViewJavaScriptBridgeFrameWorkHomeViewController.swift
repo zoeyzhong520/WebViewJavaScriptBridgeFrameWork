@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WebKit
+import AVFoundation
 
 class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridgeFrameWorkBaseViewController {
 
@@ -27,7 +27,10 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     var authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjU0LCJyb2xlVHlwZSI6MiwiaXNzIjoiaHR0cDovL3Bob25lLnNlZWR1Lm1lL3RlYWNoZXIvbG9naW4iLCJpYXQiOjE1MjIxMzAyMDUsImV4cCI6MTUyODEzMDIwNSwibmJmIjoxNTIyMTMwMjA1LCJqdGkiOiJHam9mbzRtQTN5eDFSazZDIn0.5u65fCABLVc4MXYluL0U-v1j-K1V7y-I8KGFWRQ0fgo"
     
     ///当前时间戳
-    var currentTimeStamp = ""
+    var currentTimeStamp:Int = 0
+    
+    ///录音机
+    var recorder:AVAudioRecorder?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         self.title = "Home"
         self.addLeftBarItem()
         self.addWebView()
+        self.setRecorder()
     }
     
     ///设置导航按钮
@@ -84,6 +88,14 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //录音
         self.bridge.registerHandler("record") { (data, responseCallBack) in
             self.record()
+            
+            //获取录音文件路径
+            
+        }
+        
+        //暂停录音
+        self.bridge.registerHandler("pauseRecord") { (data, responseCallBack) in
+            self.pauseRecord()
         }
         
         //停止录音
@@ -98,18 +110,25 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     
     //MARK: 录音和停止录音
     
+    ///设置录音机
+    fileprivate func setRecorder() {
+        self.getCurrentTimeStamp()
+        self.recorder = Recorder.setupRecorder(index: self.currentTimeStamp)
+    }
+    
     ///录音
     fileprivate func record() {
-        
-        //获取当前时间戳
-        self.getCurrentTimeStamp()
-        
-        
+        Recorder.startRecorder(recorder: self.recorder)
+    }
+    
+    ///暂停录音
+    fileprivate func pauseRecord() {
+        Recorder.pauseRecorder(recorder: self.recorder)
     }
     
     ///停止录音
     fileprivate func stopRecord() {
-        
+        Recorder.stopRecorder(recorder: self.recorder)
     }
     
     ///获取当前时间戳
@@ -126,7 +145,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //当前时间的时间戳
         let timeInterval = now.timeIntervalSince1970
         let timeStamp = Int(timeInterval)
-        self.currentTimeStamp = "\(timeStamp)" //赋值操作
+        self.currentTimeStamp = timeStamp //赋值操作
         print("当前时间戳：\(timeStamp)")
     }
 }
@@ -145,21 +164,6 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController: WKUIDelegate, WKNa
         print("\(error)")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
