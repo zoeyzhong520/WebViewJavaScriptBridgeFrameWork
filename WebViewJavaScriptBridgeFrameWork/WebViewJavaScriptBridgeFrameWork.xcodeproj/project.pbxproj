@@ -27,6 +27,7 @@
 		D8C00B7520736CC3006ED965 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C00B6E20736CC3006ED965 /* WebViewJavascriptBridgeBase.m */; };
 		D8C00B7620736CC3006ED965 /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C00B7020736CC3006ED965 /* WKWebViewJavascriptBridge.m */; };
 		D8C00B7820737D21006ED965 /* WebViewJavaScriptBridgeFrameWorkSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C00B7720737D21006ED965 /* WebViewJavaScriptBridgeFrameWorkSubViewController.swift */; };
+		D8F200AD207B013400A593BB /* CheckAuthStatusTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F200AC207B013400A593BB /* CheckAuthStatusTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		D8C00B6F20736CC3006ED965 /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		D8C00B7020736CC3006ED965 /* WKWebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKWebViewJavascriptBridge.m; sourceTree = "<group>"; };
 		D8C00B7720737D21006ED965 /* WebViewJavaScriptBridgeFrameWorkSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewJavaScriptBridgeFrameWorkSubViewController.swift; sourceTree = "<group>"; };
+		D8F200AC207B013400A593BB /* CheckAuthStatusTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckAuthStatusTool.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		D8945223207A4F400014BC83 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				D8F200AC207B013400A593BB /* CheckAuthStatusTool.swift */,
 				D8945232207A51150014BC83 /* common.swift */,
 				D8945224207A4F400014BC83 /* AudioPlayer.swift */,
 				D8945225207A4F400014BC83 /* Recorder.swift */,
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8945233207A51150014BC83 /* common.swift in Sources */,
+				D8F200AD207B013400A593BB /* CheckAuthStatusTool.swift in Sources */,
 				D8C00B3520736C95006ED965 /* ViewController.swift in Sources */,
 				D8C00B7820737D21006ED965 /* WebViewJavaScriptBridgeFrameWorkSubViewController.swift in Sources */,
 				D8C00B3320736C95006ED965 /* AppDelegate.swift in Sources */,
@@ -543,8 +547,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WF3TH68XDZ;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WebViewJavaScriptBridgeFrameWork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -554,6 +560,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.WebViewJavaScriptBridgeFrameWork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebViewJavaScriptBridgeFrameWork/WebViewJavaScriptBridgeFrameWork-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -566,8 +574,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WF3TH68XDZ;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WebViewJavaScriptBridgeFrameWork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -577,6 +587,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.WebViewJavaScriptBridgeFrameWork;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WebViewJavaScriptBridgeFrameWork/WebViewJavaScriptBridgeFrameWork-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

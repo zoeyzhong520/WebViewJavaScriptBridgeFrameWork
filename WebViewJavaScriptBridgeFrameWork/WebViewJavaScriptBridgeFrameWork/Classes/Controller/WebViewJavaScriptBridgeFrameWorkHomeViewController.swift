@@ -32,6 +32,12 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     ///录音机
     var recorder:AVAudioRecorder?
     
+    ///cafFilePath
+    var cafFilePath = ""
+    
+    ///mp3FilePath
+    var mp3FilePath = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setPage()
@@ -87,10 +93,9 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         
         //录音
         self.bridge.registerHandler("record") { (data, responseCallBack) in
-            self.record()
-            
-            //获取录音文件路径
-            
+            CheckAuthStatusTool.checkVideoAuthStatus(vc: self, authorizedClosure: {
+                self.record()
+            })
         }
         
         //暂停录音
@@ -101,6 +106,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //停止录音
         self.bridge.registerHandler("stopRecord") { (data, responseCallBack) in
             self.stopRecord()
+            responseCallBack!(self.mp3FilePath)
         }
         
         let url = URL(string: self.linked)
@@ -119,6 +125,18 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     ///录音
     fileprivate func record() {
         Recorder.startRecorder(recorder: self.recorder)
+        
+        //禁止自动休眠
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        self.cafFilePath = TmpPath.appendingPathComponent("\(self.currentTimeStamp).pcm")
+        self.mp3FilePath = TmpPath.appendingPathComponent("\(self.currentTimeStamp).mp3")
+        //转码
+        AudioWrapper.default().conventToMp3(withCafFilePath: self.cafFilePath, mp3FilePath: self.mp3FilePath) { (result) in
+            if result == true {
+                print("mp3 file compression sucesss")
+            }
+        }
     }
     
     ///暂停录音
@@ -129,6 +147,9 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     ///停止录音
     fileprivate func stopRecord() {
         Recorder.stopRecorder(recorder: self.recorder)
+        
+        //恢复自动休眠
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     ///获取当前时间戳
