@@ -20,7 +20,9 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     
     var bridge:WebViewJavascriptBridge!
     
-    var linked = "http://phone.seedu.me/external/migu/#/"
+    //var linked = "http://local.seedu.me/#/"
+    var linked = "http://192.168.2.37:8080/#/"
+    //http://192.168.2.37:8080/#/
     
     var baiduLinked = "http://www.baidu.com"
     
@@ -42,6 +44,11 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
         super.viewDidLoad()
         self.setPage()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.stopRecord() //停止录音
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,6 +62,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     fileprivate func setPage() {
         self.title = "Home"
         self.addLeftBarItem()
+        self.getCurrentTimeStamp()
         self.addWebView()
         self.setRecorder()
     }
@@ -95,12 +103,14 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         self.bridge.registerHandler("record") { (data, responseCallBack) in
             CheckAuthStatusTool.checkVideoAuthStatus(vc: self, authorizedClosure: {
                 self.record()
+                responseCallBack!(true)
             })
         }
         
         //暂停录音
         self.bridge.registerHandler("pauseRecord") { (data, responseCallBack) in
             self.pauseRecord()
+            responseCallBack!(true)
         }
         
         //停止录音
@@ -109,17 +119,34 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
             responseCallBack!(self.mp3FilePath)
         }
         
-        let url = URL(string: self.linked)
-        self.webView.load(URLRequest(url: url!))
+        //清除WebView缓存
+        self.bridge.registerHandler("removeWebsiteData") { (data, responseCallBack) in
+            self.removeWebsiteData()
+            responseCallBack!("清除缓存完毕")
+        }
+        
+//        let url = URL(string: self.linked)
+//        self.webView.load(URLRequest(url: url!))
+        self.loadLocalHTML()
         self.view.addSubview(webView)
+    }
+    
+    ///Load Local HTML
+    fileprivate func loadLocalHTML() {
+        
+        if let htmlPath = Bundle.main.path(forResource: "ExampleApp", ofType: "html") {
+            if let appHTML = try? NSString(contentsOfFile: htmlPath, encoding: String.Encoding.utf8.rawValue) as String {
+                let baseURL = URL(fileURLWithPath: htmlPath)
+                self.webView.loadHTMLString(appHTML, baseURL: baseURL)
+            }
+        }
     }
     
     //MARK: 录音和停止录音
     
     ///设置录音机
     fileprivate func setRecorder() {
-        self.getCurrentTimeStamp()
-        self.recorder = Recorder.setupRecorder(index: self.currentTimeStamp)
+        self.recorder = Recorder.setupRecorder(index: 1)
     }
     
     ///录音
@@ -129,8 +156,8 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //禁止自动休眠
         UIApplication.shared.isIdleTimerDisabled = true
         
-        self.cafFilePath = TmpPath.appendingPathComponent("\(self.currentTimeStamp).pcm")
-        self.mp3FilePath = TmpPath.appendingPathComponent("\(self.currentTimeStamp).mp3")
+        self.cafFilePath = TmpPath.appendingPathComponent("1.pcm")
+        self.mp3FilePath = TmpPath.appendingPathComponent("1.mp3")
         //转码
         AudioWrapper.default().conventToMp3(withCafFilePath: self.cafFilePath, mp3FilePath: self.mp3FilePath) { (result) in
             if result == true {
@@ -167,7 +194,38 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         let timeInterval = now.timeIntervalSince1970
         let timeStamp = Int(timeInterval)
         self.currentTimeStamp = timeStamp //赋值操作
+        self.linked = self.linked + "?\(self.currentTimeStamp)"
         print("当前时间戳：\(timeStamp)")
+        print("linked: \(self.linked)")
+    }
+    
+    ///Alert
+    fileprivate func alert(message: String?) {
+        
+        let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "否", style: .default, handler: { (action) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "是", style: .default, handler: { (action) in
+            self.stopRecord()
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    ///清除WebView缓存
+    fileprivate func removeWebsiteData() {
+        
+        let websiteDataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
+        
+        ///Data from
+        let dateFrom = Date(timeIntervalSince1970: 0)
+        
+        ///Execute
+        WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom) {
+            //Done
+            print("清除缓存完毕")
+        }
     }
 }
 

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D842D79B207CBE5C00260A32 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = D842D78D207CBE5C00260A32 /* index.html */; };
+		D842D79C207CBE5C00260A32 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D842D78F207CBE5C00260A32 /* 1.mp3 */; };
+		D842D79D207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css in Resources */ = {isa = PBXBuildFile; fileRef = D842D791207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css */; };
+		D842D79E207CBE5C00260A32 /* app.c34061eca59d1352b98d.js in Resources */ = {isa = PBXBuildFile; fileRef = D842D794207CBE5C00260A32 /* app.c34061eca59d1352b98d.js */; };
+		D842D79F207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js in Resources */ = {isa = PBXBuildFile; fileRef = D842D796207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js */; };
+		D842D7A0207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js in Resources */ = {isa = PBXBuildFile; fileRef = D842D798207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js */; };
+		D842D7A1207CBE5C00260A32 /* test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D842D79A207CBE5C00260A32 /* test.mp3 */; };
+		D842D7A3207CC27400260A32 /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = D842D7A2207CC27400260A32 /* ExampleApp.html */; };
 		D894522A207A4F400014BC83 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945224207A4F400014BC83 /* AudioPlayer.swift */; };
 		D894522B207A4F400014BC83 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945225207A4F400014BC83 /* Recorder.swift */; };
 		D894522C207A4F400014BC83 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945226207A4F400014BC83 /* Music.swift */; };
@@ -48,6 +56,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D842D78D207CBE5C00260A32 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		D842D78F207CBE5C00260A32 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
+		D842D791207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = app.82484b1aba990a1d26ac78f1a3e90616.css; sourceTree = "<group>"; };
+		D842D792207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = app.82484b1aba990a1d26ac78f1a3e90616.css.map; sourceTree = "<group>"; };
+		D842D794207CBE5C00260A32 /* app.c34061eca59d1352b98d.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.c34061eca59d1352b98d.js; sourceTree = "<group>"; };
+		D842D795207CBE5C00260A32 /* app.c34061eca59d1352b98d.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = app.c34061eca59d1352b98d.js.map; sourceTree = "<group>"; };
+		D842D796207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = manifest.2ae2e69a05c33dfc65f8.js; sourceTree = "<group>"; };
+		D842D797207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = manifest.2ae2e69a05c33dfc65f8.js.map; sourceTree = "<group>"; };
+		D842D798207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = vendor.3793cece39c7ec53285e.js; sourceTree = "<group>"; };
+		D842D799207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = vendor.3793cece39c7ec53285e.js.map; sourceTree = "<group>"; };
+		D842D79A207CBE5C00260A32 /* test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test.mp3; sourceTree = "<group>"; };
+		D842D7A2207CC27400260A32 /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
 		D8945224207A4F400014BC83 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		D8945225207A4F400014BC83 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		D8945226207A4F400014BC83 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
@@ -110,6 +130,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D842D78C207CBE5C00260A32 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D842D7A2207CC27400260A32 /* ExampleApp.html */,
+				D842D78D207CBE5C00260A32 /* index.html */,
+				D842D78E207CBE5C00260A32 /* static */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D842D78E207CBE5C00260A32 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				D842D78F207CBE5C00260A32 /* 1.mp3 */,
+				D842D790207CBE5C00260A32 /* css */,
+				D842D793207CBE5C00260A32 /* js */,
+				D842D79A207CBE5C00260A32 /* test.mp3 */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		D842D790207CBE5C00260A32 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				D842D791207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css */,
+				D842D792207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css.map */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		D842D793207CBE5C00260A32 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				D842D794207CBE5C00260A32 /* app.c34061eca59d1352b98d.js */,
+				D842D795207CBE5C00260A32 /* app.c34061eca59d1352b98d.js.map */,
+				D842D796207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js */,
+				D842D797207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js.map */,
+				D842D798207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js */,
+				D842D799207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js.map */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
 		D8945223207A4F400014BC83 /* Public */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +228,7 @@
 		D8C00B3120736C95006ED965 /* WebViewJavaScriptBridgeFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				D842D78C207CBE5C00260A32 /* Resources */,
 				D894522E207A4FA50014BC83 /* lame */,
 				D8945223207A4F400014BC83 /* Public */,
 				D8C00B6420736CC3006ED965 /* Classes */,
@@ -339,9 +403,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D842D79D207CBE5C00260A32 /* app.82484b1aba990a1d26ac78f1a3e90616.css in Resources */,
 				D8C00B3D20736C95006ED965 /* LaunchScreen.storyboard in Resources */,
+				D842D79B207CBE5C00260A32 /* index.html in Resources */,
 				D8C00B3A20736C95006ED965 /* Assets.xcassets in Resources */,
+				D842D7A3207CC27400260A32 /* ExampleApp.html in Resources */,
+				D842D79E207CBE5C00260A32 /* app.c34061eca59d1352b98d.js in Resources */,
 				D8C00B3820736C95006ED965 /* Main.storyboard in Resources */,
+				D842D7A1207CBE5C00260A32 /* test.mp3 in Resources */,
+				D842D7A0207CBE5C00260A32 /* vendor.3793cece39c7ec53285e.js in Resources */,
+				D842D79F207CBE5C00260A32 /* manifest.2ae2e69a05c33dfc65f8.js in Resources */,
+				D842D79C207CBE5C00260A32 /* 1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
