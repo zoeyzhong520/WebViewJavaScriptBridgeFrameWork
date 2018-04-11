@@ -116,7 +116,9 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //停止录音
         self.bridge.registerHandler("stopRecord") { (data, responseCallBack) in
             self.stopRecord()
-            responseCallBack!(self.mp3FilePath)
+            let urlPath = URL(fileURLWithPath: self.mp3FilePath)
+            print("urlPath: \(urlPath)")
+            responseCallBack!("\(urlPath)")
         }
         
         //清除WebView缓存
@@ -134,12 +136,23 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     ///Load Local HTML
     fileprivate func loadLocalHTML() {
         
-        if let htmlPath = Bundle.main.path(forResource: "ExampleApp", ofType: "html") {
-            if let appHTML = try? NSString(contentsOfFile: htmlPath, encoding: String.Encoding.utf8.rawValue) as String {
-                let baseURL = URL(fileURLWithPath: htmlPath)
-                self.webView.loadHTMLString(appHTML, baseURL: baseURL)
-            }
+        let htmlPath = Bundle.main.path(forResource: "index", ofType: "html")!
+        let html = (try? String(contentsOfFile: htmlPath, encoding: String.Encoding.utf8)) ?? ""
+        if html == "" {
+            print("html is empty")
+            return
         }
+        
+        let baseURL = URL(fileURLWithPath: htmlPath)
+        print("html: \(html)")
+        self.loadHTMLString(htmlContent: html, baseURL: baseURL)
+    }
+    
+    ///loadHTMLString
+    fileprivate func loadHTMLString(htmlContent: String, baseURL: URL) {
+        
+        // Load the html into the webview
+        self.webView.loadHTMLString(htmlContent, baseURL: baseURL)
     }
     
     //MARK: 录音和停止录音
