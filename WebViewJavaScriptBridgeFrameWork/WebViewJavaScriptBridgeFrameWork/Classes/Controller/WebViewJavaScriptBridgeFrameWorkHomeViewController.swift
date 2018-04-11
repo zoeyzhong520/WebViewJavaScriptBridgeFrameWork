@@ -63,6 +63,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         self.title = "Home"
         self.addLeftBarItem()
         self.getCurrentTimeStamp()
+        self.copyFile()
         self.addWebView()
         self.setRecorder()
     }
@@ -123,36 +124,14 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         
         //清除WebView缓存
         self.bridge.registerHandler("removeWebsiteData") { (data, responseCallBack) in
-            self.removeWebsiteData()
+            WebViewJavaScriptBridgeFrameWorkHomeViewModel.removeWebsiteData()
             responseCallBack!("清除缓存完毕")
         }
         
-//        let url = URL(string: self.linked)
+        let url = URL(string: self.linked)
 //        self.webView.load(URLRequest(url: url!))
-        self.loadLocalHTML()
+        WebViewJavaScriptBridgeFrameWorkHomeViewModel.loadLocalHTML(webView: self.webView)
         self.view.addSubview(webView)
-    }
-    
-    ///Load Local HTML
-    fileprivate func loadLocalHTML() {
-        
-        let htmlPath = Bundle.main.path(forResource: "index", ofType: "html")!
-        let html = (try? String(contentsOfFile: htmlPath, encoding: String.Encoding.utf8)) ?? ""
-        if html == "" {
-            print("html is empty")
-            return
-        }
-        
-        let baseURL = URL(fileURLWithPath: htmlPath)
-        print("html: \(html)")
-        self.loadHTMLString(htmlContent: html, baseURL: baseURL)
-    }
-    
-    ///loadHTMLString
-    fileprivate func loadHTMLString(htmlContent: String, baseURL: URL) {
-        
-        // Load the html into the webview
-        self.webView.loadHTMLString(htmlContent, baseURL: baseURL)
     }
     
     //MARK: 录音和停止录音
@@ -169,8 +148,8 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //禁止自动休眠
         UIApplication.shared.isIdleTimerDisabled = true
         
-        self.cafFilePath = TmpPath.appendingPathComponent("1.pcm")
-        self.mp3FilePath = TmpPath.appendingPathComponent("1.mp3")
+        self.cafFilePath = DocumentPath.appendingPathComponent("1.pcm")
+        self.mp3FilePath = DocumentPath.appendingPathComponent("1.mp3")
         //转码
         AudioWrapper.default().conventToMp3(withCafFilePath: self.cafFilePath, mp3FilePath: self.mp3FilePath) { (result) in
             if result == true {
@@ -195,17 +174,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     ///获取当前时间戳
     fileprivate func getCurrentTimeStamp() {
         
-        //获取当前时间
-        let now = Date()
-        
-        //创建一个日期格式器
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
-        print("当前日期时间：\(dateFormatter.string(from: now))")
-        
-        //当前时间的时间戳
-        let timeInterval = now.timeIntervalSince1970
-        let timeStamp = Int(timeInterval)
+        let timeStamp = WebViewJavaScriptBridgeFrameWorkHomeViewModel.getCurrentTimeStamp()
         self.currentTimeStamp = timeStamp //赋值操作
         self.linked = self.linked + "?\(self.currentTimeStamp)"
         print("当前时间戳：\(timeStamp)")
@@ -226,19 +195,10 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    ///清除WebView缓存
-    fileprivate func removeWebsiteData() {
+    ///copyFile
+    fileprivate func copyFile() {
         
-        let websiteDataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
-        
-        ///Data from
-        let dateFrom = Date(timeIntervalSince1970: 0)
-        
-        ///Execute
-        WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom) {
-            //Done
-            print("清除缓存完毕")
-        }
+        WebViewJavaScriptBridgeFrameWorkHomeViewModel.copyFile()
     }
 }
 

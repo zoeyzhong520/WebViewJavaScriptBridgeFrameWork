@@ -18,3 +18,13 @@ let screenHeight = UIScreen.main.bounds.size.height
 
 /// tmp目录路径
 let TmpPath = NSTemporaryDirectory() as NSString
+
+/// bundle 目录路径
+let BundlePath = Bundle.main.bundlePath as NSString
+
+/// Documents目录路径
+let DocumentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+
+///pc.seedu.me
+let PCAppURL = "https://pc.seedu.me"
+

@@ -21,7 +21,7 @@ class Recorder: NSObject {
     
     class func setupRecorder(index: Int) -> AVAudioRecorder {
         
-        let url = NSURL(fileURLWithPath: TmpPath.appendingPathComponent("\(index).pcm"))
+        let url = NSURL(fileURLWithPath: DocumentPath.appendingPathComponent("\(index).pcm"))
         print(url)
         
         let settings = [AVSampleRateKey: NSNumber.init(floatLiteral: 11025.0), AVFormatIDKey: NSNumber.init(floatLiteral: Double(kAudioFormatLinearPCM)), AVNumberOfChannelsKey: NSNumber.init(floatLiteral: 2), AVEncoderAudioQualityKey: NSNumber.init(floatLiteral: Double(AVAudioQuality.high.rawValue)), AVLinearPCMBitDepthKey: NSNumber.init(value: 16), AVEncoderBitRateKey: NSNumber.init(value: 12800)]
