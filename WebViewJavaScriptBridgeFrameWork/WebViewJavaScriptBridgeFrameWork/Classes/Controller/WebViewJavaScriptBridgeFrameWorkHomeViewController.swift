@@ -189,6 +189,9 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     ///录音
     fileprivate func record() {
         Recorder.startRecorder(recorder: self.recorder)
+        Recorder.shareInstance.finishRecordingClosure = { [weak self] audioDurationSeconds in
+            self?.audioDurationSeconds = audioDurationSeconds //赋值
+        }
         
         //设置录音状态
         self.isRecording = true
@@ -198,7 +201,6 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         
         self.cafFilePath = TmpPath.appendingPathComponent("\(self.currentTimeStamp).pcm")
         self.mp3FilePath = TmpPath.appendingPathComponent("\(self.currentTimeStamp).mp3")
-//        self.musicURL = URL(fileURLWithPath: self.cafFilePath)
         
         //转码
         AudioWrapper.default().conventToMp3(withCafFilePath: self.cafFilePath, mp3FilePath: self.mp3FilePath) { (result) in
@@ -226,9 +228,6 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         
         //恢复自动休眠
         UIApplication.shared.isIdleTimerDisabled = false
-        
-        //获取录音文件的时长
-        self.audioDurationSeconds = Recorder.audioDuration(index: self.currentTimeStamp)
     }
     
     //MARK: 上传录音文件

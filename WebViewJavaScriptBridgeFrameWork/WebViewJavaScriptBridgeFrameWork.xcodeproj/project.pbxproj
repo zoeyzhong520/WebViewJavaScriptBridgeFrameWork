@@ -269,13 +269,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D81F5D9A207F5CC00057C263 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		D81F5D9C207F5D480057C263 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,7 +443,6 @@
 		D8C00B6420736CC3006ED965 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D81F5D9A207F5CC00057C263 /* Model */,
 				D870DFE1207DB79100CD8F9A /* ViewModel */,
 				D8C00B6520736CC3006ED965 /* Controller */,
 			);

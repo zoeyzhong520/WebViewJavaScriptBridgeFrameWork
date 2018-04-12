@@ -160,6 +160,7 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
             print("uuid: \(uuid)")
             self.hideHUD(alert: alert)
             success(uuid)
+            self.showHUDWithDuration(vc: vc, message: "上传完成")
         }) { (error) in
             self.hideHUD(alert: alert)
         }
@@ -171,6 +172,17 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         vc.present(alert, animated: true, completion: nil)
         return alert
+    }
+    
+    class func showHUDWithDuration(vc: UIViewController, message: String?, duration: TimeInterval = 1.0) {
+        
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        vc.present(alert, animated: true, completion: nil)
+        
+        //延迟执行
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+            alert.dismiss(animated: true, completion: nil)
+        }
     }
     
     ///hideHUD

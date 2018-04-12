@@ -19,8 +19,15 @@ class Recorder: NSObject {
     static var shareInstance = Recorder()
     private override init() {}
     
+    ///录音结束执行的闭包
+    var finishRecordingClosure:((Double) -> Void)?
+    
+    ///index
+    var index:Int = 0
+    
     class func setupRecorder(index: Int) -> AVAudioRecorder {
         
+        shareInstance.index = index //为index赋值
         let url = NSURL(fileURLWithPath: TmpPath.appendingPathComponent("\(index).pcm"))
         print(url)
         
@@ -83,6 +90,12 @@ extension Recorder: AVAudioRecorderDelegate {
         if flag == true {
             print("录音  完毕")
             AudioWrapper.default().sendEndRecord()
+            
+            //获取录音文件的时长
+            let audioDurationSeconds = Recorder.audioDuration(index: index)
+            if finishRecordingClosure != nil {
+                finishRecordingClosure!(audioDurationSeconds)
+            }
             
             //当我们的场景结束时，为了不影响其他场景播放声音变小
             do {
