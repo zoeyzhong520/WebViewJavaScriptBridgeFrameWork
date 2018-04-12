@@ -12,12 +12,13 @@ import AVFoundation
 class CheckAuthStatusTool: NSObject {
 
     ///检测用户是否已进行麦克风使用授权
-    class func checkVideoAuthStatus(vc: UIViewController, authorizedClosure: (() -> Void)) {
+    class func checkVideoAuthStatus(vc: UIViewController, authorizedClosure: (() -> Void), unAuthorizedClosure: (() -> Void)) {
         
         let videoAuthStatus = AVCaptureDevice.authorizationStatus(for: .audio)
         if videoAuthStatus == AVAuthorizationStatus.restricted || videoAuthStatus == AVAuthorizationStatus.denied {
             //未授权
             CheckAuthStatusTool.showSetAlertView(vc: vc)
+            unAuthorizedClosure()
         } else {
             //已授权
             authorizedClosure()

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
     
@@ -130,6 +131,52 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
             }
         }
         return filePath
+    }
+    
+    ///上传录音文件
+    class fileprivate func uploadFile(URLString: String, parameters: [String : Any]?, headers: HTTPHeaders?, fileURL: URL?, name: String?, fileName: String?, success: @escaping ((String) -> Void), failure: @escaping ((NSError) -> Void)) {
+        
+        NetWorkTool.uploadFile(URLString: URLString, parameters: parameters ?? [String : Any](), headers: headers, fileURL: fileURL, name: name, fileName: fileName, finishedCallback: { (data) in
+            
+            do {
+                let json = try JSON(data: data as! Data)
+                let uuid = json["data"]["uuid"].string ?? ""
+                success(uuid)
+            } catch let error {
+                print("error: \(error.localizedDescription)")
+            }
+            
+        }) { (error) in
+            failure(error)
+        }
+    }
+    
+    ///上传录音文件
+    class func uploadFile(URLString: String, parameters: [String : Any]? = nil, headers: HTTPHeaders? = nil, fileURL: URL?, name: String?, fileName: String?, vc: UIViewController, success: @escaping ((String) -> Void)) {
+        
+        let alert = self.showHUD(vc: vc, message: "上传中···")
+        
+        self.uploadFile(URLString: URLString, parameters: parameters, headers: headers, fileURL: fileURL, name: name, fileName: fileName, success: { (uuid) in
+            print("uuid: \(uuid)")
+            self.hideHUD(alert: alert)
+            success(uuid)
+        }) { (error) in
+            self.hideHUD(alert: alert)
+        }
+    }
+    
+    ///showHUD
+    class func showHUD(vc: UIViewController, message: String?) -> UIAlertController {
+        
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        vc.present(alert, animated: true, completion: nil)
+        return alert
+    }
+    
+    ///hideHUD
+    class func hideHUD(alert: UIAlertController) {
+        
+        alert.dismiss(animated: true, completion: nil)
     }
 }
 

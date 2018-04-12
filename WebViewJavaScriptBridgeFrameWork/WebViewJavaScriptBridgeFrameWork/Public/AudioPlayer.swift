@@ -11,6 +11,10 @@ import AVFoundation
 
 class AudioPlayer: NSObject {
 
+    //单例
+    static let shareInstance = AudioPlayer()
+    private override init() {}
+    
     private static var instance: AVAudioPlayer? = nil
     private static var activeMusic: Music? = nil
     private static var isRandomPlay = false
@@ -22,6 +26,7 @@ class AudioPlayer: NSObject {
         
         do {
             try instance = AVAudioPlayer(contentsOf: model.musicURL!)
+            instance?.delegate = shareInstance
         } catch {
             print("error occured: \(error)")
             
@@ -43,6 +48,7 @@ class AudioPlayer: NSObject {
         
         do {
             try instance = AVAudioPlayer(data: NSData(contentsOf: model.musicURL!) as Data)
+            instance?.delegate = shareInstance
         } catch {
             print("error occured: \(error)")
             
@@ -128,7 +134,19 @@ class AudioPlayer: NSObject {
     }
 }
 
-
+extension AudioPlayer: AVAudioPlayerDelegate {
+    
+    //MARK: AVAudioPlayerDelegate
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        print("播放 完成")
+        
+        if finishPlayingClosure != nil {
+            finishPlayingClosure!() //进行闭包回调
+        }
+    }
+}
 
 
 

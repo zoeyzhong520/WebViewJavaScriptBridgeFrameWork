@@ -21,7 +21,7 @@ class Recorder: NSObject {
     
     class func setupRecorder(index: Int) -> AVAudioRecorder {
         
-        let url = NSURL(fileURLWithPath: DocumentPath.appendingPathComponent("\(index).pcm"))
+        let url = NSURL(fileURLWithPath: TmpPath.appendingPathComponent("\(index).pcm"))
         print(url)
         
         let settings = [AVSampleRateKey: NSNumber.init(floatLiteral: 11025.0), AVFormatIDKey: NSNumber.init(floatLiteral: Double(kAudioFormatLinearPCM)), AVNumberOfChannelsKey: NSNumber.init(floatLiteral: 2), AVEncoderAudioQualityKey: NSNumber.init(floatLiteral: Double(AVAudioQuality.high.rawValue)), AVLinearPCMBitDepthKey: NSNumber.init(value: 16), AVEncoderBitRateKey: NSNumber.init(value: 12800)]
@@ -60,6 +60,19 @@ class Recorder: NSObject {
     //MARK: 结束录音
     class func stopRecorder(recorder:AVAudioRecorder?) {
         recorder?.stop()
+    }
+    
+    //MARKL: 获取录音文件的时长
+    class func audioDuration(index: Int) -> Double {
+        
+        //使用AVURLAsset获取音频时长
+        
+        let url = URL(fileURLWithPath: TmpPath.appendingPathComponent("\(index).pcm"))
+        let audioAsset = AVURLAsset.init(url: url, options: nil)
+        let audioDuration = audioAsset.duration
+        let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
+        print("audioDurationSeconds: \(audioDurationSeconds)")
+        return audioDurationSeconds
     }
 }
 

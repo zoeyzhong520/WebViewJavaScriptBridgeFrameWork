@@ -28,3 +28,25 @@ let DocumentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .user
 ///pc.seedu.me
 let PCAppURL = "https://pc.seedu.me"
 
+///Host
+let Host = "phone.seedu.me"
+
+/// 任务-主观题单题提交 POST
+let SubjectiveSubmitUrl = "http://\(Host)/subject"
+
+/// 共读语音文件提交 POST
+let SubmitUrl = "http://\(Host)/hybrid/file"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
