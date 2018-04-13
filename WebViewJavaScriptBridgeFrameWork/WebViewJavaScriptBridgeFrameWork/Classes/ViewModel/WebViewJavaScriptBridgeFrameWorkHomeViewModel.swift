@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
     
+    //MARK: - Local HTML
+    
     ///Load Local HTML
     class func loadLocalHTML(webView: WKWebView) {
         
@@ -46,6 +48,8 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
         webView.loadHTMLString(htmlContent, baseURL: baseURL)
     }
     
+    //MARK: - 清除WebView缓存
+    
     ///清除WebView缓存
     class func removeWebsiteData() {
         
@@ -60,6 +64,8 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
             print("清除缓存完毕")
         }
     }
+    
+    //MARK: - 获取当前时间戳
     
     ///获取当前时间戳
     class func getCurrentTimeStamp() -> Int {
@@ -79,6 +85,8 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
         
         return timeStamp
     }
+    
+    //MARK: - 文件操作
     
     ///拷贝文件到沙盒
     class func copyMissionFile(sourcePath: String, toPath: String) -> Bool {
@@ -112,12 +120,6 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
         self.copyMissionFile(sourcePath: cssFilePath, toPath: DocumentPath as String) == true ? print("OK") : print("NO")
     }
     
-    ///bundleFrameworkPath
-    class func bundleFrameworkPath(resource: String, ofType: String) -> String {
-        
-        return Bundle.main.path(forResource: resource, ofType: ofType) ?? ""
-    }
-    
     /// 获取沙盒目录下的所有html、css、js文件
     class func htmlCssJsFilePaths(dirPath: String) -> [String] {
         
@@ -132,6 +134,16 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
         }
         return filePath
     }
+    
+    //MARK: - Bundle获取文件路径
+    
+    ///bundleFrameworkPath
+    class func bundleFrameworkPath(resource: String, ofType: String) -> String {
+        
+        return Bundle.main.path(forResource: resource, ofType: ofType) ?? ""
+    }
+    
+    //MARK: - 文件上传
     
     ///上传录音文件
     class fileprivate func uploadFile(URLString: String, parameters: [String : Any]?, headers: HTTPHeaders?, fileURL: URL?, name: String?, fileName: String?, success: @escaping ((String) -> Void), failure: @escaping ((NSError) -> Void)) {
@@ -166,6 +178,8 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
         }
     }
     
+    //MARK: - HUD活动指示器
+    
     ///showHUD
     class func showHUD(vc: UIViewController, message: String?) -> UIAlertController {
         
@@ -189,6 +203,29 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewModel: NSObject {
     class func hideHUD(alert: UIAlertController) {
         
         alert.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: - 自定义弹框
+    
+    ///showAlertWithMessage
+    class func showAlertWithMessage(vc: UIViewController, message: String?, completion: @escaping (() -> Void)) {
+        
+        let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "否", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "是", style: .default, handler: { (action) in
+            completion()
+        }))
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: - GCD
+    
+    ///主线程GCD延时执行
+    class func asyncAfterOnMainQueue(deadline: TimeInterval, completion: @escaping (() -> Void)) {
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + deadline) {
+            completion()
+        }
     }
 }
 

@@ -21,7 +21,8 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     var bridge:WebViewJavascriptBridge!
     
 //    var linked = "http://local.seedu.me/#/"
-    var linked = "http://192.168.2.37:8080/#/"
+//    var linked = "http://192.168.2.37:8080/#/"
+    var linked = "http://192.168.2.37/pc/#/"
     
     var baiduLinked = "http://www.baidu.com"
     
@@ -46,10 +47,16 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     var musicURL:URL!
     
     ///音频文件时长
-    var audioDurationSeconds:Double = 0.0
+    var audioDurationSeconds:Int = 0
     
     ///上传录音文件返回的uuid
     var uuid = ""
+    
+    ///当前播放时间
+    var currentPlayingTime = ""
+    
+    ///播放音频的Timer
+    var playerTimer:Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +65,9 @@ class WebViewJavaScriptBridgeFrameWorkHomeViewController: WebViewJavaScriptBridg
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.stopRecord() //停止录音
+        self.stopPlay()
+        self.stopRecord()
+        self.clearCache()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,15 +82,15 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     //MARK: UI
     fileprivate func setPage() {
         self.title = "Home"
-        self.addLeftBarItem()
+        self.addRightBarItem()
         self.addWebView()
     }
     
     ///设置导航按钮
-    fileprivate func addLeftBarItem() {
+    fileprivate func addRightBarItem() {
         
-        let leftBtn = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(leftBarClickAction))
-        self.navigationItem.rightBarButtonItem = leftBtn
+        let rightBtn = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(leftBarClickAction))
+        self.navigationItem.rightBarButtonItem = rightBtn
     }
     
     @objc fileprivate func leftBarClickAction() {
@@ -151,8 +160,9 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
             print("data: \(data)")
             let dataDict = data as? [String : Any]
             let fileName = dataDict?["name"] ?? ""
+            let time = dataDict?["time"] ?? 0
             self.musicURL = URL(fileURLWithPath: TmpPath.appendingPathComponent("\(fileName).pcm"))
-            self.play()
+            self.play(startPlayingTime: time as! Double)
             responseCallBack!(true)
         }
         
@@ -165,6 +175,7 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         //停止播放
         self.bridge.registerHandler("stopPlay") { (data, responseCallBack) in
             self.stopPlay()
+            responseCallBack!(true)
         }
         
         //清除WebView缓存
@@ -189,9 +200,6 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     ///录音
     fileprivate func record() {
         Recorder.startRecorder(recorder: self.recorder)
-        Recorder.shareInstance.finishRecordingClosure = { [weak self] audioDurationSeconds in
-            self?.audioDurationSeconds = audioDurationSeconds //赋值
-        }
         
         //设置录音状态
         self.isRecording = true
@@ -228,6 +236,9 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         
         //恢复自动休眠
         UIApplication.shared.isIdleTimerDisabled = false
+        
+        //获取音频时长
+        self.audioDurationSeconds = Int(Recorder.audioDuration(index: self.currentTimeStamp))
     }
     
     //MARK: 上传录音文件
@@ -248,15 +259,18 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     //MARK: 播放和停止播放
     
     ///播放
-    fileprivate func play() {
+    fileprivate func play(startPlayingTime: Double = 0.0) {
         
         if AudioPlayer.share(model: Music.createModel(withMusicURL: self.musicURL, withVoice_Time: nil, withAudio: nil)) {
             AudioPlayer.play()
+            AudioPlayer.instance?.currentTime = startPlayingTime //指定开始播放的位置
             AudioPlayer.shareInstance.finishPlayingClosure = { [weak self] in
+                self?.stopPlay() //停止播放
                 self?.bridge.callHandler("onend", data: "data", responseCallback: { (callBack) in
                     print("callBack: \(callBack)")
                 })
             }
+            self.setPlayerTimer()
         } else {
             print("AudioPlayer初始化失败")
         }
@@ -266,12 +280,40 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
     fileprivate func pausePlay() {
     
         AudioPlayer.pause()
+        self.releasePlayerTimer()
     }
     
     ///停止播放
     fileprivate func stopPlay() {
         
         AudioPlayer.stop()
+        self.releasePlayerTimer()
+    }
+    
+    ///设置playerTimer
+    fileprivate func setPlayerTimer() {
+        
+        self.playerTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setPlayBackground), userInfo: nil, repeats: true)
+    }
+    
+    ///setPlayBackground
+    @objc fileprivate func setPlayBackground() {
+        
+        self.currentPlayingTime = "\(Int(ceil(AudioPlayer.currentTime())))" //小数取整
+        self.bridge.callHandler("onplaying", data: self.currentPlayingTime, responseCallback: { (callBack) in
+            print("callBack: \(callBack)")
+        })
+        
+        if !AudioPlayer.isPlaying() {
+            self.releasePlayerTimer()
+        }
+    }
+    
+    ///释放playerTimer
+    fileprivate func releasePlayerTimer() {
+        
+        guard let timer = self.playerTimer else { return }
+        timer.invalidate()
     }
     
     //MARK: 其他方法
@@ -286,24 +328,25 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController {
         print("linked: \(self.linked)")
     }
     
-    ///Alert
-    fileprivate func alert(message: String?) {
-        
-        let alert = UIAlertController(title: "提示", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "否", style: .default, handler: { (action) in
-            
-        }))
-        alert.addAction(UIAlertAction(title: "是", style: .default, handler: { (action) in
-            self.stopRecord()
-            self.navigationController?.popViewController(animated: true)
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     ///copyFile
     fileprivate func copyFile() {
         
         WebViewJavaScriptBridgeFrameWorkHomeViewModel.copyFile()
+    }
+    
+    ///showAlertWithMessage
+    fileprivate func showAlertWithMessage() {
+        
+        WebViewJavaScriptBridgeFrameWorkHomeViewModel.showAlertWithMessage(vc: self, message: "当前正在录音，是否退出？") {
+            self.stopRecord() //停止录音
+            self.clearCache()
+        }
+    }
+    
+    ///clearCache
+    fileprivate func clearCache() {
+        
+        FileCacheHelper.clearCacheWithFilePath(path: TmpPath as String) == true ? print("清除成功") : print("清除失败") //清除录音缓存
     }
 }
 
@@ -315,13 +358,6 @@ extension WebViewJavaScriptBridgeFrameWorkHomeViewController: WKUIDelegate, WKNa
         print(#function)
     }
     
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print("\(error)")
-    }
-    
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("\(error)")
-    }
 }
 
 

@@ -72,14 +72,13 @@ class Recorder: NSObject {
     //MARKL: 获取录音文件的时长
     class func audioDuration(index: Int) -> Double {
         
-        //使用AVURLAsset获取音频时长
+        var musicDuration:Double = 0.0
         
-        let url = URL(fileURLWithPath: TmpPath.appendingPathComponent("\(index).pcm"))
-        let audioAsset = AVURLAsset.init(url: url, options: nil)
-        let audioDuration = audioAsset.duration
-        let audioDurationSeconds = CMTimeGetSeconds(audioDuration)
-        print("audioDurationSeconds: \(audioDurationSeconds)")
-        return audioDurationSeconds
+        let music = Music.createModel(withMusicURL: URL(fileURLWithPath: TmpPath.appendingPathComponent("\(index).pcm")), withVoice_Time: nil, withAudio: nil)
+        if AudioPlayer.share(model: music) {
+            musicDuration = AudioPlayer.musicDuration()
+        }
+        return musicDuration
     }
 }
 
@@ -90,12 +89,6 @@ extension Recorder: AVAudioRecorderDelegate {
         if flag == true {
             print("录音  完毕")
             AudioWrapper.default().sendEndRecord()
-            
-            //获取录音文件的时长
-            let audioDurationSeconds = Recorder.audioDuration(index: index)
-            if finishRecordingClosure != nil {
-                finishRecordingClosure!(audioDurationSeconds)
-            }
             
             //当我们的场景结束时，为了不影响其他场景播放声音变小
             do {

@@ -10,6 +10,7 @@
 		D81F5D92207F04C40057C263 /* NetWorkTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F5D91207F04C40057C263 /* NetWorkTool.swift */; };
 		D81F5DB4207F5D4F0057C263 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81F5DA7207F5D480057C263 /* SwiftyJSON.framework */; };
 		D81F5DB5207F5D4F0057C263 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D81F5DA7207F5D480057C263 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D82A498420807B7A004690B0 /* UIViewController+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82A498320807B7A004690B0 /* UIViewController+Util.swift */; };
 		D842D7A3207CC27400260A32 /* ExampleApp.html in Resources */ = {isa = PBXBuildFile; fileRef = D842D7A2207CC27400260A32 /* ExampleApp.html */; };
 		D870DFBC207DAECF00CD8F9A /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D870DFAF207DAECF00CD8F9A /* 1.mp3 */; };
 		D870DFBD207DAECF00CD8F9A /* app.16099212544d1bb4422c4995bb23c599.css in Resources */ = {isa = PBXBuildFile; fileRef = D870DFB1207DAECF00CD8F9A /* app.16099212544d1bb4422c4995bb23c599.css */; };
@@ -21,6 +22,8 @@
 		D870DFDC207DB6F500CD8F9A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D870DFCF207DB6EF00CD8F9A /* Alamofire.framework */; };
 		D870DFDD207DB6F600CD8F9A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D870DFCF207DB6EF00CD8F9A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D870DFE3207DB7A000CD8F9A /* WebViewJavaScriptBridgeFrameWorkHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D870DFE2207DB7A000CD8F9A /* WebViewJavaScriptBridgeFrameWorkHomeViewModel.swift */; };
+		D88D4A7920803E6000915EEC /* WebViewJavaScriptBridgeFrameWorkWebViewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88D4A7820803E6000915EEC /* WebViewJavaScriptBridgeFrameWorkWebViewDetailViewController.swift */; };
+		D88D4A7B2080428200915EEC /* FileCacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88D4A7A2080428200915EEC /* FileCacheHelper.swift */; };
 		D894522A207A4F400014BC83 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945224207A4F400014BC83 /* AudioPlayer.swift */; };
 		D894522B207A4F400014BC83 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945225207A4F400014BC83 /* Recorder.swift */; };
 		D894522C207A4F400014BC83 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8945226207A4F400014BC83 /* Music.swift */; };
@@ -191,6 +194,7 @@
 /* Begin PBXFileReference section */
 		D81F5D91207F04C40057C263 /* NetWorkTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkTool.swift; sourceTree = "<group>"; };
 		D81F5D9B207F5D480057C263 /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
+		D82A498320807B7A004690B0 /* UIViewController+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Util.swift"; sourceTree = "<group>"; };
 		D842D7A2207CC27400260A32 /* ExampleApp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = ExampleApp.html; sourceTree = "<group>"; };
 		D870DFAF207DAECF00CD8F9A /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		D870DFB1207DAECF00CD8F9A /* app.16099212544d1bb4422c4995bb23c599.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = app.16099212544d1bb4422c4995bb23c599.css; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 		D870DFBB207DAECF00CD8F9A /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		D870DFC3207DB6EE00CD8F9A /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = "<group>"; };
 		D870DFE2207DB7A000CD8F9A /* WebViewJavaScriptBridgeFrameWorkHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewJavaScriptBridgeFrameWorkHomeViewModel.swift; sourceTree = "<group>"; };
+		D88D4A7820803E6000915EEC /* WebViewJavaScriptBridgeFrameWorkWebViewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewJavaScriptBridgeFrameWorkWebViewDetailViewController.swift; sourceTree = "<group>"; };
+		D88D4A7A2080428200915EEC /* FileCacheHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCacheHelper.swift; sourceTree = "<group>"; };
 		D8945224207A4F400014BC83 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		D8945225207A4F400014BC83 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		D8945226207A4F400014BC83 /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
@@ -283,6 +289,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D82A497420807B6B004690B0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D82A498320807B7A004690B0 /* UIViewController+Util.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		D842D78C207CBE5C00260A32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,13 +365,14 @@
 		D8945223207A4F400014BC83 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				D88D4A7A2080428200915EEC /* FileCacheHelper.swift */,
+				D81F5D91207F04C40057C263 /* NetWorkTool.swift */,
 				D8F200AC207B013400A593BB /* CheckAuthStatusTool.swift */,
 				D8945232207A51150014BC83 /* common.swift */,
 				D8945224207A4F400014BC83 /* AudioPlayer.swift */,
 				D8945225207A4F400014BC83 /* Recorder.swift */,
 				D8945226207A4F400014BC83 /* Music.swift */,
 				D8945227207A4F400014BC83 /* AudioWrapper */,
-				D81F5D91207F04C40057C263 /* NetWorkTool.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -406,6 +421,7 @@
 		D8C00B3120736C95006ED965 /* WebViewJavaScriptBridgeFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				D82A497420807B6B004690B0 /* Extension */,
 				D842D78C207CBE5C00260A32 /* Resources */,
 				D894522E207A4FA50014BC83 /* lame */,
 				D8945223207A4F400014BC83 /* Public */,
@@ -455,6 +471,7 @@
 				D8C00B6620736CC3006ED965 /* WebViewJavaScriptBridgeFrameWorkBaseViewController.swift */,
 				D8C00B6720736CC3006ED965 /* WebViewJavaScriptBridgeFrameWorkHomeViewController.swift */,
 				D8C00B7720737D21006ED965 /* WebViewJavaScriptBridgeFrameWorkSubViewController.swift */,
+				D88D4A7820803E6000915EEC /* WebViewJavaScriptBridgeFrameWorkWebViewDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -546,7 +563,7 @@
 					D8C00B2E20736C95006ED965 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					D8C00B4220736C95006ED965 = {
 						CreatedOnToolsVersion = 9.2;
@@ -731,6 +748,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D82A498420807B7A004690B0 /* UIViewController+Util.swift in Sources */,
 				D8945233207A51150014BC83 /* common.swift in Sources */,
 				D8F200AD207B013400A593BB /* CheckAuthStatusTool.swift in Sources */,
 				D8C00B3520736C95006ED965 /* ViewController.swift in Sources */,
@@ -739,11 +757,13 @@
 				D894522B207A4F400014BC83 /* Recorder.swift in Sources */,
 				D8C00B7420736CC3006ED965 /* WebViewJavascriptBridge_JS.m in Sources */,
 				D8C00B7220736CC3006ED965 /* WebViewJavaScriptBridgeFrameWorkHomeViewController.swift in Sources */,
+				D88D4A7920803E6000915EEC /* WebViewJavaScriptBridgeFrameWorkWebViewDetailViewController.swift in Sources */,
 				D894522D207A4F400014BC83 /* AudioWrapper.m in Sources */,
 				D8C00B7520736CC3006ED965 /* WebViewJavascriptBridgeBase.m in Sources */,
 				D8C00B7620736CC3006ED965 /* WKWebViewJavascriptBridge.m in Sources */,
 				D894522A207A4F400014BC83 /* AudioPlayer.swift in Sources */,
 				D8C00B7120736CC3006ED965 /* WebViewJavaScriptBridgeFrameWorkBaseViewController.swift in Sources */,
+				D88D4A7B2080428200915EEC /* FileCacheHelper.swift in Sources */,
 				D81F5D92207F04C40057C263 /* NetWorkTool.swift in Sources */,
 				D8C00B7320736CC3006ED965 /* WebViewJavascriptBridge.m in Sources */,
 				D870DFE3207DB7A000CD8F9A /* WebViewJavaScriptBridgeFrameWorkHomeViewModel.swift in Sources */,
@@ -925,9 +945,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WF3TH68XDZ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8W234NQNE5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WebViewJavaScriptBridgeFrameWork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -936,10 +956,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebViewJavaScriptBridgeFrameWork/Public/lame",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.WebViewJavaScriptBridgeFrameWork;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HY.ZhongZiRead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "01a42245-81d7-4e67-b161-1bfccb4a585a";
+				PROVISIONING_PROFILE_SPECIFIER = ZhongZiRead20170404;
 				SWIFT_OBJC_BRIDGING_HEADER = "WebViewJavaScriptBridgeFrameWork/WebViewJavaScriptBridgeFrameWork-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -953,9 +973,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WF3TH68XDZ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 8W234NQNE5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WebViewJavaScriptBridgeFrameWork/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -964,10 +984,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WebViewJavaScriptBridgeFrameWork/Public/lame",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zzj.WebViewJavaScriptBridgeFrameWork;
+				PRODUCT_BUNDLE_IDENTIFIER = com.HY.ZhongZiRead;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "01a42245-81d7-4e67-b161-1bfccb4a585a";
+				PROVISIONING_PROFILE_SPECIFIER = ZhongZiRead20170404;
 				SWIFT_OBJC_BRIDGING_HEADER = "WebViewJavaScriptBridgeFrameWork/WebViewJavaScriptBridgeFrameWork-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

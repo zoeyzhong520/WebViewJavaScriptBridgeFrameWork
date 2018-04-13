@@ -37,6 +37,12 @@ let SubjectiveSubmitUrl = "http://\(Host)/subject"
 /// 共读语音文件提交 POST
 let SubmitUrl = "http://\(Host)/hybrid/file"
 
+///状态栏高度
+let StatusBarHeight = UIApplication.shared.statusBarFrame.size.height
+
+//导航栏高度
+let NavigationBarHeight:CGFloat = 44.0
+
 
 
 

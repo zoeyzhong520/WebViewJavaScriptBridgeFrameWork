@@ -15,7 +15,7 @@ class AudioPlayer: NSObject {
     static let shareInstance = AudioPlayer()
     private override init() {}
     
-    private static var instance: AVAudioPlayer? = nil
+    static var instance: AVAudioPlayer? = nil
     private static var activeMusic: Music? = nil
     private static var isRandomPlay = false
     
